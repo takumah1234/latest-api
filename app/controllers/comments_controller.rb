@@ -38,6 +38,10 @@ class CommentsController < ApplicationController
     @comment.destroy
   end
 
+  def get_from_url
+    render json: @comment.where(url: param[:url])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
