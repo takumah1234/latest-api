@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
   end
 
   def get_from_url
-    render json: @comment.where(url: param[:url])
+    render json: @comment.where(url: params[:url])
   end
 
   private
