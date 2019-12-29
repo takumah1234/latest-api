@@ -41,12 +41,14 @@ class CommentsController < ApplicationController
   # GET /comments/get_from_url?url=hogehoge
   def get_from_url
     if params[:sharenum] != "null" then
-      @comments = Comment.where(["url = ? and sharenum = ? ", params[:url], params[:sharenum]])
+      @share = Comment.where(["url = ? and sharenum = ? ", params[:url], params[:sharenum]]).records
     end
     
-    @comments += Comment.where(["url = ? and sharenum is null ", params[:url]])
+    @comments = Comment.where(["url = ? and sharenum is null ", params[:url]]).records
 
-    render json: @comments
+    @res = @share + @comments
+
+    render json: @res
   end
 
   private
