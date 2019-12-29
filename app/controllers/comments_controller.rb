@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/get_from_url?url=hogehoge&sharenum=hogehoge
   def get_from_url
-    @comments = Comment.where(["url = ?", params[:url]])
+    @comments = Comment.where(["url = ? and sharenum = ? ", params[:url], params[:sharenum]])
 
     render json: @comments
   end
@@ -53,6 +53,6 @@ class CommentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def comment_params
-      params.fetch(:comment, {}).permit(:node_id, :x, :y, :comment, :url)
+      params.fetch(:comment, {}).permit(:node_id, :x, :y, :comment, :url, :sharenum)
     end
 end
