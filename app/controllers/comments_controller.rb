@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
 
   # GET /comments/get_from_url?url=hogehoge&sharenum=hogehoge
   def get_from_url
-    @comments = Comment.where(["name = ?", params[:url]])
+    @comments = Comment.where(["url = ?", params[:url]])
 
     render json: @comments
   end
