@@ -38,10 +38,10 @@ class CommentsController < ApplicationController
     @comment.destroy
   end
 
-  # GET /comments/get_from_url?url=hogehoge
+  # GET /comments/get_from_url?url=hogehoge&sharenum=hogehoge
   def get_from_url
-    @comments = Comment.where(url: params[:url])
-    
+    @comments = Comment.where(["name = ?", params[:url]])
+
     render json: @comments
   end
 
