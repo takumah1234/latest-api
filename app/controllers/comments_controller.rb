@@ -38,13 +38,9 @@ class CommentsController < ApplicationController
     @comment.destroy
   end
 
-  # GET /comments/get_from_url?url=hogehoge&sharenum=hogehoge
+  # GET /comments/get_from_url?url=hogehoge
   def get_from_url
-    if (params[:sharenum] == "null"){
-      @comments = Comment.where(["url = ?", params[:url])
-    }else{
-      @comments = Comment.where(["url = ? and sharenum = ? ", params[:url], params[:sharenum]])
-    }
+    @comments = Comment.where(["url = ? and sharenum = ? ", params[:url], params[:sharenum]])
 
     render json: @comments
   end
