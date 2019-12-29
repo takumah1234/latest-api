@@ -40,7 +40,11 @@ class CommentsController < ApplicationController
 
   # GET /comments/get_from_url?url=hogehoge
   def get_from_url
-    @comments = Comment.where(["url = ? and sharenum = ? ", params[:url], params[:sharenum]])
+    if params[:sharenum] != "null" then
+      @comments = Comment.where(["url = ? and sharenum = ? ", params[:url], params[:sharenum]])
+    end
+    
+    @comments += Comment.where(["url = ? and sharenum is null ", params[:url]])
 
     render json: @comments
   end
